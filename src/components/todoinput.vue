@@ -1,8 +1,10 @@
 <template>
   <div class="inputBox shadow">
       <input type="text" v-model="newTodoItem" placeholder="글자를 입력하세요." 
-      v-on:keyup.enter="addTodo">
-      <button class="addContainer" v-on:click="addTodo">
+      @keyup.enter="addTodo"
+      >
+
+      <button class="addContainer" @click="addTodo">
           <i class="addBtn fas fa-plus"></i>
       </button>
   </div>
@@ -11,26 +13,25 @@
 
 <script>
 export default {
-    name:'input',
+       name:'input',
     data(){
-       return{
-           newTodoItem:'',
+        return{
+            newTodoItem:'',
         }
     },
     methods:{
         addTodo(){
             console.log(this.newTodoItem);
             let value = this.newTodoItem;
-            localStorage.setItem(value,value);
-            // this.$emit('addTodo',value);
+            //localStorage.setItem(value,value);
+            this.$emit('addTodo',value);
             this.clearInput();
         },
         clearInput(){
             this.newTodoItem = '';
         }
     }
-
-}
+    }
 </script>
 
 <style scoped>
@@ -41,12 +42,11 @@ export default {
         height: 50px;
         border-radius:5px;
         margin-bottom: 10px;
-
-    }
+        }
   .inputBox input{
       border-style: none;
       font-size: 1rem;
-  }
+        }
     .addContainer {
         border-style: none;
         float:right;
@@ -55,7 +55,7 @@ export default {
         width: 3rem;
         height: 50px;
         border-radius: 0 5px 5px 0;
-    }
+        }
     .addBtn{
         color:sandybrown;
     }
